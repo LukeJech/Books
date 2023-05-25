@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Authors</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body class="bg-slate-800 text-white">
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-10 w-full bg-white py-2 text-neutral-600 shadow-lg hover:text-neutral-700 focus:text-neutral-700">
+        <div class="px-6">
+            <!-- Navigation links -->
+            <ul class="mr-auto flex text-lg font-semibold">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="site logo" class="w-12 h-12">
+                <li>
+                <a class="block transition duration-150 ease-in-out hover:text-neutral-400 p-2" href="/authors">Home</a>
+                </li>
+                <li>
+                <a class="block transition duration-150 ease-in-out hover:text-neutral-400 p-2" href="/books">Books</a>
+                </li>
+                <li>
+                <a class="block transition duration-150 ease-in-out hover:text-neutral-400 p-2" href="/author/1">Author</a>
+                </li>
+                <li>
+                <a class="block transition duration-150 ease-in-out hover:text-neutral-400 p-2" href="#!">Add Book</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+     <!-- Hero section with background image, heading, subheading and button -->
+    <div class="relative overflow-hidden bg-cover bg-no-repeat p-12 text-center" style="background-image: url('{{ url_for('static', filename='images/book_background.jpg') }}'); height: 800px">
+        <div class="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-fixed" style="background-color: rgba(0, 0, 0, 0.6)">
+            <div class="flex flex-col h-full items-center justify-center">
+                <h2 class="mb-4 text-4xl font-semibold">All Authors</h2>
+                <div class="hide_scroll text-white text-lg space-y-8 w-1/2 h-1/2 border-2 border-white rounded-lg py-4 hover:bg-gray-200 hover:bg-opacity-5">
+                    {% for author in authors%}
+                    <a href="/author/{{author.id}}" class="block hover:text-blue-400">{{author.name}}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="relative overflow-hidden bg-cover bg-no-repeat p-12 text-center" style="background-image: url('{{ url_for('static', filename='images/writing_bg.jpg') }}'); height: 600px">
+        <div class="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-fixed" style="background-color: rgba(0, 0, 0, 0.4)">
+            <div class="flex h-full items-center justify-center">
+                <form action="/create/author" method="post" class="text-white space-y-8 w-1/3 border-2 border-white rounded-lg py-4 hover:bg-gray-800 hover:bg-opacity-5">
+                    <h2 class="mb-4 text-4xl font-semibold">New Author</h2>
+                    <div>
+                        <label for="name" class="hover:text-neutral-200">Name:</label>
+                        <input type="text" name="name" id="name" class="ml-2 pl-1 outline-none text-slate-700 " placeholder="J.R.R. Tolkien">
+                    </div>
+                    <button type="submit" class="rounded border-2 border-neutral-50 px-10 pb-[10px] pt-[12px] text-sm font-medium uppercase text-neutral-50 transition duration-200 ease-in-out hover:border-neutral-100 hover:bg-neutral-600 hover:bg-opacity-40 hover:text-neutral-100 active:border-neutral-200 active:text-neutral-200">Create</button>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<!-- Format for adding images -->
+<!-- <img src="{{ url_for('static', filename='images/img.png') }}"> -->
+<!-- style="background-image: url('{{ url_for('static', filename='images/temple.jpg') }}'); height: 800px" -->

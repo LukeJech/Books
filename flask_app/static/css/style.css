@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.hide_scroll {
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  /* WebKit (Chrome, Safari) */
+  .hide_scroll::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Firefox */
+  .hide_scroll {
+    scrollbar-width: none;
+  }
+  
+
+td {
+    padding: 1rem 3rem;
+    text-align: center;
+}
+
+th {
+    padding: 1.5rem 3rem;
+    text-align: center;
+}
