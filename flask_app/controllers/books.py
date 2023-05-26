@@ -10,8 +10,8 @@ def create_book():
     return redirect('/books')
 
 #Create on favorites table
-@app.route('/create/favorite', methods=['POST'])
-def create_favorite():
+@app.route('/create/favorite/book', methods=['POST'])
+def create_favorite_book():
     author.Author.create_favorite(request.form)
     return redirect(f'/books/{request.form["books_id"]}')
 
@@ -19,12 +19,23 @@ def create_favorite():
 
 @app.route('/books')
 def books_page():
-    return render_template('books.html', books = book.Book.get_all_books())
+    return render_template('books.html', books = book.Book.get_all_books(), authors = author.Author.get_all_authors())
 
 @app.route('/books/<int:book_id>')
 def book_page(book_id):
     favorite_authors = book.Book.get_books_with_authors(book_id).authors
-    return render_template('book_page.html', book = book.Book.get_one_book(book_id), authors = author.Author.get_all_authors(), favorite_authors = favorite_authors )
+    authors = author.Author.get_all_authors()
+    other_authors = []
+    for one_author in authors:
+        is_favorite = False
+        for favorite in favorite_authors:
+            if one_author.id == favorite.id:
+                is_favorite = True
+                break
+        if not is_favorite:
+            other_authors.append(one_author)
+
+    return render_template('book_page.html', books = book.Book.get_all_books(), book = book.Book.get_one_book(book_id), authors = authors , favorite_authors = favorite_authors, other_authors = other_authors )
 
 
 

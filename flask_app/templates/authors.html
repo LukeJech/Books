@@ -18,22 +18,37 @@
         <div class="px-6">
             <!-- Navigation links -->
             <ul class="mr-auto flex text-lg font-semibold">
-                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="site logo" class="w-12 h-12">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="site logo" class="w-12 h-12 ">
                 <li>
-                <a class="block transition duration-150 ease-in-out hover:text-neutral-400 p-2" href="/authors">Home</a>
+                    <a class="block transition duration-150 ease-in-out hover:text-neutral-400 py-2 px-4" href="/authors">Home</a>
                 </li>
                 <li>
-                <a class="block transition duration-150 ease-in-out hover:text-neutral-400 p-2" href="/books">Books</a>
+                    <a class="block transition duration-150 ease-in-out hover:text-neutral-400 py-2 px-4" href="/books">Books</a>
                 </li>
-                <li>
-                <a class="block transition duration-150 ease-in-out hover:text-neutral-400 p-2" href="/author/1">Author</a>
+                <li class="relative dropdown_menu ">
+                    <a class="block transition duration-150 ease-in-out hover:text-neutral-400 py-2 px-4" href="#">Author Pages</a>
+                    <ul class="absolute hidden bg-white shadow-lg py-2 px-3 w-full" >
+                        {% for author in authors %}
+                        <li>
+                            <a class="block transition duration-150 ease-in-out hover:text-yellow-400" href="/author/{{author.id}}">• {{ author.name }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
                 </li>
-                <li>
-                <a class="block transition duration-150 ease-in-out hover:text-neutral-400 p-2" href="#!">Add Book</a>
+                <li class="relative dropdown_menu">
+                    <a class="block transition duration-150 ease-in-out hover:text-neutral-400 py-2 px-4" href="#">Book Pages</a>
+                    <ul class="absolute hidden bg-white shadow-lg py-2 px-3 w-full">
+                        {% for book in books %}
+                        <li>
+                            <a class="block transition duration-150 ease-in-out hover:text-yellow-400" href="/books/{{book.id}}">• {{book.title}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
                 </li>
             </ul>
         </div>
     </nav>
+
      <!-- Hero section with background image, heading, subheading and button -->
     <div class="relative overflow-hidden bg-cover bg-no-repeat p-12 text-center" style="background-image: url('{{ url_for('static', filename='images/book_background.jpg') }}'); height: 800px">
         <div class="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-fixed" style="background-color: rgba(0, 0, 0, 0.6)">

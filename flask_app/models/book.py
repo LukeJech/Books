@@ -60,7 +60,7 @@ class Book:
         query = """
         SELECT * FROM books
         LEFT JOIN favorites ON favorites.books_id = books.id
-        LEFT JOIN authors ON favorites.users_id = authors.id
+        LEFT JOIN authors ON favorites.authors_id = authors.id
         WHERE books.id = %(id)s
         ; """
         results = connectToMySQL(cls.db).query_db(query, {'id':book_id})
