@@ -3,6 +3,11 @@ from flask import render_template, redirect, request, session
 from flask_app.models import author, book # import entire file, rather than class, to avoid circular imports
 
 # Create Users Controller
+@app.route('/')
+def to_home():
+    return redirect('/authors')
+
+
 @app.route('/create/author', methods=['POST'])
 def create_author():
     #use author model to create a new database entry
